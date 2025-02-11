@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: order-service
+  namespace: amq-streams-kafka
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: order-service:latest
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/vaibhava_srivastava/Springboot-kafka-microservices.git"
+      ref: "main"
+    contextDir: "order-service"
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
