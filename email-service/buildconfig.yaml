@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: email-service
+  namespace: amq-streams-kafka
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: email-service:latest
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/vaibhava_srivastava/Springboot-kafka-microservices.git"
+      ref: "main"
+    contextDir: "email-service"
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
