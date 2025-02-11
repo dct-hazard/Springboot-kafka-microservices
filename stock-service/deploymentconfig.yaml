@@ -1,0 +1,58 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: stock-service
+  namespace: amq-streams-kafka
+spec:
+  replicas: 1
+  selector:
+    app: stock-service
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: stock-service
+    spec:
+      containers:
+        - name: stock-service
+          image: quay.io/vaibhava_srivastava/kafka:stock-service
+          ports:
+            - containerPort: 8081
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - stock-service
+        from:
+          kind: ImageStreamTag
+          name: stock-service:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-service
+  namespace: amq-streams-kafka
+spec:
+  selector:
+    app: stock-service
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: stock-service
+  namespace: amq-streams-kafka
+spec:
+  to:
+    kind: Service
+    name: stock-service
+  port:
+    targetPort: 8081
+  tls:
+    termination: edge
