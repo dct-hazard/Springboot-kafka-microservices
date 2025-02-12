@@ -16,9 +16,9 @@ pipeline {
         stage("Build & Push Microservices") {
             steps {
                 script {
-                    sh "oc start-build -F order-service --from-dir=order-service --insecure-skip-tls-verify"
-                    sh "oc start-build -F stock-service --from-dir=stock-service --insecure-skip-tls-verify"
-                    sh "oc start-build -F email-service --from-dir=email-service --insecure-skip-tls-verify"
+                    sh "oc start-build -F order-service --from-dir=order-service"
+                    sh "oc start-build -F stock-service --from-dir=stock-service"
+                    sh "oc start-build -F email-service --from-dir=email-service"
                 }
             }
         }
