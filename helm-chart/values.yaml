@@ -15,3 +15,5 @@ microservices:
     port: 8080
   stock-service:
     port: 8081
+
+routeDomain: apps.cluster-qrfnn.dynamic.redhatworkshops.io
