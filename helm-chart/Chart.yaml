@@ -1,0 +1,5 @@
+apiVersion: v2
+name: kafka-microservices
+description: A Helm chart for deploying Spring Boot Kafka microservices
+version: 0.1.0
+appVersion: latest
