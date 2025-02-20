@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ .Release.Name }}-order-service
+spec:
+  to:
+    kind: Service
+    name: {{ .Release.Name }}-order-service
+  port:
+    targetPort: {{ .Values.microservices.order-service.port }}
+  tls:
+    termination: edge
