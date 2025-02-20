@@ -7,6 +7,6 @@ spec:
     kind: Service
     name: {{ .Release.Name }}-order-service
   port:
-    targetPort: {{ .Values.microservices.order-service.port }}
+    targetPort: {{ index .Values.microservices "order-service" "port" }}
   tls:
     termination: edge
