@@ -3,6 +3,7 @@ kind: Route
 metadata:
   name: {{ .Release.Name }}-order-service
 spec:
+  host: {{ .Release.Name }}-order.{{ .Values.routeDomain }}
   to:
     kind: Service
     name: {{ .Release.Name }}-order-service
