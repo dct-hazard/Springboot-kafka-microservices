@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-email-service
 spec:
   selector:
-    app: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+    app: {{ .Release.Name }}-email-service
   ports:
     - protocol: TCP
       port: 8082
@@ -18,7 +18,7 @@ metadata:
   name: {{ .Release.Name }}-order-service
 spec:
   selector:
-    app: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+    app: {{ .Release.Name }}-order-service
   ports:
     - protocol: TCP
       port: 8080
@@ -32,7 +32,7 @@ metadata:
   name: {{ .Release.Name }}-stock-service
 spec:
   selector:
-    app: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+    app: {{ .Release.Name }}-stock-service
   ports:
     - protocol: TCP
       port: 8081
