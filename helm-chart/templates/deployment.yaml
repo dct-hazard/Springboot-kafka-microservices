@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+    spec:
+      containers:
+        - name: {{ .Values.microservices.email-service }}
+          image: "{{ .Values.image.repository }}/email-service:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.microservices.email-service.port }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+    spec:
+      containers:
+        - name: {{ .Values.microservices.order-service }}
+          image: "{{ .Values.image.repository }}/order-service:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.microservices.order-service.port }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+    spec:
+      containers:
+        - name: {{ .Values.microservices.stock-service }}
+          image: "{{ .Values.image.repository }}/stock-service:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.microservices.stock-service.port }}
