@@ -12,6 +12,7 @@ spec:
   type: {{ .Values.service.type }}
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,6 +27,7 @@ spec:
   type: {{ .Values.service.type }}
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
