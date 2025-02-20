@@ -1,61 +1,61 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+  name: {{ .Release.Name }}-email-service
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+      app: {{ .Release.Name }}-email-service
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Values.microservices.email-service }}
+        app: {{ .Release.Name }}-email-service
     spec:
       containers:
-        - name: {{ .Values.microservices.email-service }}
+        - name: email-service
           image: "{{ .Values.image.repository }}/email-service:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.microservices.email-service.port }}
+            - containerPort: {{ index .Values.microservices "email-service" "port" }}
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+  name: {{ .Release.Name }}-order-service
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+      app: {{ .Release.Name }}-order-service
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Values.microservices.order-service }}
+        app: {{ .Release.Name }}-order-service
     spec:
       containers:
-        - name: {{ .Values.microservices.order-service }}
+        - name: order-service
           image: "{{ .Values.image.repository }}/order-service:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.microservices.order-service.port }}
+            - containerPort: {{ index .Values.microservices "order-service" "port" }}
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+  name: {{ .Release.Name }}-stock-service
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+      app: {{ .Release.Name }}-stock-service
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Values.microservices.stock-service }}
+        app: {{ .Release.Name }}-stock-service
     spec:
       containers:
-        - name: {{ .Values.microservices.stock-service }}
+        - name: stock-service
           image: "{{ .Values.image.repository }}/stock-service:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.microservices.stock-service.port }}
+            - containerPort: {{ index .Values.microservices "stock-service" "port" }}
