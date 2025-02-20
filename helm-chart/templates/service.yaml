@@ -8,7 +8,7 @@ spec:
   ports:
     - protocol: TCP
       port: 8082
-      targetPort: {{ .Values.microservices.email-service.port }}
+      targetPort: {{ index .Values.microservices "email-service" "port" }}
   type: {{ .Values.service.type }}
 
 ---
@@ -23,7 +23,7 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      targetPort: {{ .Values.microservices.order-service.port }}
+      targetPort: {{ index .Values.microservices "order-service" "port" }}
   type: {{ .Values.service.type }}
 
 ---
@@ -38,5 +38,5 @@ spec:
   ports:
     - protocol: TCP
       port: 8081
-      targetPort: {{ .Values.microservices.stock-service.port }}
+      targetPort: {{ index .Values.microservices "stock-service" "port" }}
   type: {{ .Values.service.type }}
