@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: image-registry.openshift-image-registry.svc:5000/springboot-kafka-microservices
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+
+microservices:
+  email-service:
+    port: 8082
+  order-service:
+    port: 8080
+  stock-service:
+    port: 8081
